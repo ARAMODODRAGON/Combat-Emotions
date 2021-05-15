@@ -225,10 +225,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 533693685, guid: 3324a8aad8cef8142af1e85fd58adf41, type: 3}
-      propertyPath: m_timeToToggleCombat
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 1911037574, guid: 3324a8aad8cef8142af1e85fd58adf41, type: 3}
       propertyPath: m_Camera
       value: 

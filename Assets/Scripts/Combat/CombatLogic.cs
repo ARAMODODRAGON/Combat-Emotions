@@ -5,7 +5,8 @@ using UnityEngine;
 public class CombatLogic {
 
 	enum CombatState : byte {
-
+		None = 0,
+		InitialDelay
 	}
 
 	// references
