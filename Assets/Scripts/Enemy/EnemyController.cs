@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-	private static List<EnemyController> s_enemyControllers;
+	private static List<EnemyController> s_enemyControllers = new List<EnemyController>();
 
 	public static int CountEnemies => s_enemyControllers.Count;
 	public static EnemyController GetEnemy(int index) => s_enemyControllers[index];

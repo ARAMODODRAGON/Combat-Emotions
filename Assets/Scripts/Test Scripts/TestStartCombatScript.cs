@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestStartCombatScript : MonoBehaviour {
 
+	public CombatHandler handler;
 	public PlayerController player;
 	public EnemyController enemy;
 
@@ -29,6 +30,7 @@ public class TestStartCombatScript : MonoBehaviour {
 
 
 	private void StartCombat() {
-		
+		handler.StartCombat(player, enemy);
+		this.enabled = false;
 	}
 }
