@@ -316,6 +316,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1959491978, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
+      propertyPath: verticalSpeed
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959491978, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
+      propertyPath: horizontalSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6707295390103029632, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
       propertyPath: m_Name
       value: Player
@@ -366,3 +374,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
+--- !u!1 &6707295389361356297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6707295390103029632, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
+  m_PrefabInstance: {fileID: 6707295389361356296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &6707295389361356298
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707295389361356297}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 683361d3444679341b7d7e16ac397f68, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
