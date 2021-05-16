@@ -67,8 +67,12 @@ public class EnemyManager : MonoBehaviour
 
             if(s_enemyControllers.Count == 0)
             {
-                //TODO
-                //Call Sean's stuff to unlock camera 
+				//TODO
+				//Call Sean's stuff to unlock camera
+				if (playerRef != null)
+				{
+					playerRef.GetCamera().ChangeState(CameraStates.MoveRight);
+				}
             }
         }
     }

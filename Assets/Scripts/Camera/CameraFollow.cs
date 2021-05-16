@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
 {
 	// playerref
 	public PlayerController player;
-	public CameraStates state;
+	CameraStates state;
 
 	// how long does it take for the camera to reach target
 	[SerializeField] float cameraTime;
@@ -32,7 +32,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+		state = CameraStates.MoveRight;
     }
 
     // Update is called once per frame
@@ -131,8 +131,6 @@ public class CameraFollow : MonoBehaviour
 				if (g_.combat == true)
 				{
 					EnemyManager.s_enmInstance.BeginEncounter(g_.encounterIndex);
-					Debug.Log("Combat Called");
-					Debug.Log(g_.encounterIndex);
 				}
 
 				g_.triggered = true;

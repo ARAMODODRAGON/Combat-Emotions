@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
 	public Rigidbody2D rb { get; private set; }
 
-	public CameraFollow cam;
+	[SerializeField] CameraFollow cam;
 
 	private void Awake()
 	{
@@ -60,6 +60,11 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log("Rigidbody is null");
 		}
+	}
+
+	public CameraFollow GetCamera()
+	{
+		return cam;
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)
