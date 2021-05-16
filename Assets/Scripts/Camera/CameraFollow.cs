@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
 {
 	// playerref
 	public PlayerController player;
-	CameraStates state;
+	[SerializeField] CameraStates state;
 
 	// how long does it take for the camera to reach target
 	[SerializeField] float cameraTime;
