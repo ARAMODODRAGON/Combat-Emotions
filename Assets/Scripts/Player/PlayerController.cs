@@ -9,13 +9,16 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float horizontalSpeed;
 	Vector2 moveDir;
 
+	private bool wasmoving = false;
+	public EnemyAnimator anim { get; private set; } = null;
+
 	public Rigidbody2D rb { get; private set; }
 
 	[SerializeField] CameraFollow cam;
 
 	private void Awake()
 	{
-
+		anim = GetComponent<EnemyAnimator>();
 	}
 
 	public void Start()
@@ -29,6 +32,10 @@ public class PlayerController : MonoBehaviour
 		HandleInput();
 	}
 
+	private void OnEnable() {
+		if (wasmoving) anim.ToggleMove();
+		else anim.ToggleIdle();
+	}
 	//physics stuff
 	public void FixedUpdate()
 	{
@@ -50,6 +57,13 @@ public class PlayerController : MonoBehaviour
 
 		finalMovement.x = moveDir.x * horizontalSpeed * Time.fixedDeltaTime;
 		finalMovement.y = moveDir.y * verticalSpeed * Time.fixedDeltaTime;
+
+		// update animation
+		if (finalMovement.sqrMagnitude > 0.001f != wasmoving) {
+			if (wasmoving) anim.ToggleIdle();
+			else anim.ToggleMove();
+			wasmoving = finalMovement.sqrMagnitude > 0.001f;
+		}
 
 		// null check
 		if (rb != null)

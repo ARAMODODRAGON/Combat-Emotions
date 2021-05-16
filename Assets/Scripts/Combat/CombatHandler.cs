@@ -77,7 +77,7 @@ public class CombatHandler : MonoBehaviour {
 			}
 			if (ec.body) ec.body.simulated = false;
 		}
-		/* TMP */
+		player.enabled = false;
 		Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
 		if (rb) rb.simulated = false;
 
@@ -161,6 +161,8 @@ public class CombatHandler : MonoBehaviour {
 					if (ec.body) ec.body.simulated = true;
 				}
 			}
+			m_player.enabled = true;
+			m_player.GetComponent<Rigidbody2D>().simulated = true;
 		}
 		float delta = m_currentLerpValue / m_timeToToggleCombat;
 
