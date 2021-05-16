@@ -998,7 +998,7 @@ MonoBehaviour:
     m_playerCombos:
     - {fileID: 11400000, guid: eeb5ec11b291f0142954f76f7667c6a6, type: 2}
     - {fileID: 11400000, guid: e45f69089de65914d9dcee70f2cd9714, type: 2}
-    m_playerComboDropDelay: 0.25
+    m_playerComboDropDelay: 0.5
     m_shakeLength: 0.2
     m_normalDelay: 2
     m_shortPauseLength: 1

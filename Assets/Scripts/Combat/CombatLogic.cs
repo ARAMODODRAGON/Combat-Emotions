@@ -318,9 +318,6 @@ public class CombatLogic {
 			// add to list and confirm if it matches any combos
 			m_currentCombo.Add(m_playerEmote);
 
-			if (m_currentCombo.Count == 2) {
-				Debug.Log("Hey");
-			}
 			// check combo
 			bool matchany = false;
 			Pattern exactmatch = null;
@@ -374,7 +371,7 @@ public class CombatLogic {
 			}
 			// we are doing a combo
 			else if (matchany) {
-				// ignore?
+				// ignore
 			}
 			// we fucked up the combo
 			else {
