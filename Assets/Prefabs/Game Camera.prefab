@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3868530855648310289}
   - component: {fileID: 3868530855648310294}
+  - component: {fileID: 1710980734}
   - component: {fileID: 3868530855648310295}
-  - component: {fileID: 3868530855771576679}
   - component: {fileID: 3868530855771576683}
   - component: {fileID: 3868530855771576682}
   - component: {fileID: 3868530855771576681}
@@ -80,15 +80,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3868530855648310295
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3868530855648310292}
-  m_Enabled: 1
---- !u!114 &3868530855771576679
+--- !u!114 &1710980734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,13 +89,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3868530855648310292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4efaee356c574c40a0804217ff488dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 19787edb5995911438029140f1c1d6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   state: 0
-  cameraTime: 0.5
-  tolerance: 0.1
+  cameraTime: 0
+  tolerance: 0
+--- !u!81 &3868530855648310295
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868530855648310292}
+  m_Enabled: 1
 --- !u!61 &3868530855771576683
 BoxCollider2D:
   m_ObjectHideFlags: 0
