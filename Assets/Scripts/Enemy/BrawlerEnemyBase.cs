@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class BrawlerEnemyBase : MonoBehaviour
 {
+
+    public static readonly string APPEAR_EFFECT = "Appear";
+    public static readonly string DEATH_EFFECT = "Die";
+
     private EnemyController ctrl = null;
 
     [Header("-1: attacks player without checking distance")]
     public float enemyAttackRadius = -1.0f;
+
+    [SerializeField]
+    private BrawlerEnemyEffectsScriptableObject effects;
 
     void Start()
     {
@@ -15,7 +22,12 @@ public class BrawlerEnemyBase : MonoBehaviour
         //If the radius is negative, then start moving
         if (enemyAttackRadius < 0.0f)
             if (ctrl)
-                ctrl.b_Moving = true;
+                ctrl.StartMoving();
+
+        //Spawn appear effect
+        EnemySpawnObject effect_ = effects.GetEffect(APPEAR_EFFECT);
+        if (effect_)
+            Instantiate(effect_, gameObject.transform.position, gameObject.transform.rotation);
     }
 
     void Update()
@@ -28,15 +40,23 @@ public class BrawlerEnemyBase : MonoBehaviour
         //Check distance to player and move when the player is close enough
         if (ctrl)
         {
-            if (!ctrl.b_Moving)
+            if (!ctrl.b_Moving && !EnemyManager.s_enmInstance.bEngagedInBattle)
             {
                 float distanceToPlayer = (EnemyManager.s_enmInstance.playerRef.transform.position - gameObject.transform.position).magnitude;
 
                 if (distanceToPlayer <= enemyAttackRadius)
                 {
-                    ctrl.b_Moving = true;
+                    ctrl.StartMoving();
                 }
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        //Spawn death effect
+        EnemySpawnObject effect_ = effects.GetEffect(DEATH_EFFECT);
+        if (effect_)
+            Instantiate(effect_,gameObject.transform.position, gameObject.transform.rotation);
     }
 }

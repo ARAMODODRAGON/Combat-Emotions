@@ -25,6 +25,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public void ToggleMove()
     {
+        Debug.Log("Toggle move");
         if (anim)
             anim.SetTrigger(ANIM_MOVE);
     }
@@ -33,5 +34,10 @@ public class EnemyAnimator : MonoBehaviour
     {
         if (anim)
             anim.SetTrigger(ANIM_DIE);
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
     }
 }
