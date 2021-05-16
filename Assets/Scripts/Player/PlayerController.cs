@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
 	public Rigidbody2D rb { get; private set; }
 
+	public CameraFollow cam;
 
 	private void Awake()
 	{
@@ -58,6 +59,19 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			Debug.Log("Rigidbody is null");
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.CompareTag("Gate"))
+		{
+			Gate g = col.GetComponent<Gate>();
+
+			if (g != null)
+			{
+				cam.HandleGateCollision(g);
+			}
 		}
 	}
 
