@@ -125,7 +125,7 @@ public class CameraFollow : MonoBehaviour
 				state = g_.state;
 				if (g_.combat == true)
 				{
-					//EnemyManager.s_enmInstance.BeginEncounter(g_.encounterIndex);
+					EnemyManager.s_enmInstance.BeginEncounter(g_.encounterIndex);
 					Debug.Log("Combat Called");
 					Debug.Log(g_.encounterIndex);
 				}
