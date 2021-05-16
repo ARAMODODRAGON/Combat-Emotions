@@ -62,8 +62,8 @@ public class CombatHandler : MonoBehaviour {
 		m_enemySprite.sortingOrder = 2;
 
 		// step 1: freeze all other enemies and stop the rigidbodies from taking effect
-		for (int i = 0; i < EnemyController.CountEnemies; i++) {
-			EnemyController ec = EnemyController.GetEnemy(i);
+		for (int i = 0; i < EnemyManager.countEnemies; i++) {
+			EnemyController ec = EnemyManager.GetEnemy(i);
 			if (ec != enemy) ec.enabled = false;
 			if (ec.body) ec.body.simulated = false;
 		}
