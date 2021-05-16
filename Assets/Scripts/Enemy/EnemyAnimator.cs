@@ -10,6 +10,8 @@ public class EnemyAnimator : MonoBehaviour
     private static readonly int ANIM_IDLE = Animator.StringToHash("Idle");
     private static readonly int ANIM_MOVE = Animator.StringToHash("Move");
     private static readonly int ANIM_DIE = Animator.StringToHash("Die");
+    private static readonly int ANIM_ATTACK = Animator.StringToHash("Attack");
+    private static readonly int ANIM_HURT = Animator.StringToHash("Hurt");
 
 
     void Start()
@@ -25,7 +27,6 @@ public class EnemyAnimator : MonoBehaviour
 
     public void ToggleMove()
     {
-        Debug.Log("Toggle move");
         if (anim)
             anim.SetTrigger(ANIM_MOVE);
     }
@@ -39,5 +40,17 @@ public class EnemyAnimator : MonoBehaviour
     public void Dead()
     {
         Destroy(gameObject);
+    }
+
+    public void Attack()
+    {
+        if (anim)
+            anim.SetTrigger(ANIM_ATTACK);
+    }
+
+    public void Hurt()
+    {
+        if (anim)
+            anim.SetTrigger(ANIM_HURT);
     }
 }
