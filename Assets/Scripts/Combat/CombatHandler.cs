@@ -24,6 +24,7 @@ public class CombatHandler : MonoBehaviour {
 	private SpriteRenderer m_playerSprite = null;
 	private EnemyController m_enemy = null;
 	private SpriteRenderer m_enemySprite = null;
+	private EnemyAnimator m_enemyAnimator = null;
 
 	// positions of stuff
 	private Vector3 m_playerOldPos = Vector3.zero;
@@ -58,13 +59,18 @@ public class CombatHandler : MonoBehaviour {
 		m_enemy = enemy;
 		m_playerSprite = player.GetComponent<SpriteRenderer>();
 		m_enemySprite = enemy.GetComponent<SpriteRenderer>();
+		m_logic.enemyAnimator = m_enemyAnimator = enemy.GetComponent<EnemyAnimator>();
 		m_playerSprite.sortingOrder = 2;
 		m_enemySprite.sortingOrder = 2;
 
 		// step 1: freeze all other enemies and stop the rigidbodies from taking effect
+		EnemyManager.s_enmInstance.bEngagedInBattle = true;
 		for (int i = 0; i < EnemyManager.countEnemies; i++) {
 			EnemyController ec = EnemyManager.GetEnemy(i);
-			if (ec != enemy) ec.enabled = false;
+			if (ec != enemy) {
+				ec.enabled = false;
+				ec.GetComponent<EnemyAnimator>().anim.speed = 0.0f;
+			}
 			if (ec.body) ec.body.simulated = false;
 		}
 		/* TMP */
@@ -77,6 +83,7 @@ public class CombatHandler : MonoBehaviour {
 		m_currentLerpValue = 0.0f;
 		m_playerOldPos = m_player.transform.position;
 		m_enemyOldPos = m_enemy.transform.position;
+		m_enemyAnimator.ToggleIdle();
 
 	}
 
@@ -116,7 +123,8 @@ public class CombatHandler : MonoBehaviour {
 		//m_player.transform.position = m_playerTargetPos.position;
 		//m_enemy.transform.position = m_enemyTargetPos.position;
 
-		m_logic.Step();
+		if (!m_logic.IsDone) m_logic.Step();
+		else m_handlerState = HandlerState.LeavingCombat;
 	}
 
 	private void UpdateExitCombat() {
@@ -129,6 +137,18 @@ public class CombatHandler : MonoBehaviour {
 			// change sorting layer
 			m_playerSprite.sortingOrder = 0;
 			m_enemySprite.sortingOrder = 0;
+			EnemyManager.s_enmInstance.bEngagedInBattle = false;
+			m_enemyAnimator.ToggleDie();
+
+			// reenable stuff
+			for (int i = 0; i < EnemyManager.countEnemies; i++) {
+				EnemyController ec = EnemyManager.GetEnemy(i);
+				if (ec != m_enemy) {
+					ec.enabled = true;
+					ec.GetComponent<EnemyAnimator>().anim.speed = 1.0f;
+					if (ec.body) ec.body.simulated = true;
+				}
+			}
 		}
 		float delta = m_currentLerpValue / m_timeToToggleCombat;
 

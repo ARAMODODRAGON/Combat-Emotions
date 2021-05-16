@@ -7,15 +7,12 @@ public class CombatLogic {
 
 	enum CombatState : byte {
 		None = 0,
-		PreBattle,
-		PostBattle,
 		NormalPause,
 		EnemyCombo_ShowEmotion,
 		EnemyCombo_ShortPauseA,
 		EnemyCombo_Attack,
 		EnemyCombo_ShortPauseB,
-		PostComboPause,
-		EnemyTakeDamage
+		PostComboPause
 	}
 
 	// input
@@ -35,6 +32,7 @@ public class CombatLogic {
 	private EnemyCombatInfo m_eci = null;
 	[HideInInspector] public Transform playerTargetPos = null;
 	[HideInInspector] public Transform enemyTargetPos = null;
+	[HideInInspector] public EnemyAnimator enemyAnimator = null;
 
 	[SerializeField] private UnityEngine.UI.Image m_playerHappyIcon = null;
 	[SerializeField] private UnityEngine.UI.Image m_playerSadIcon = null;
@@ -44,6 +42,9 @@ public class CombatLogic {
 	[SerializeField] private UnityEngine.UI.Image m_enemyAngryIcon = null;
 	[SerializeField] private UnityEngine.UI.Text m_playerComboText = null;
 	[SerializeField] private UnityEngine.UI.Text m_enemyComboText = null;
+
+	[SerializeField] private UnityEngine.UI.Image[] m_playerHealthIndicator = null;
+	[SerializeField] private UnityEngine.UI.Image[] m_enemyHealthIndicator = null;
 
 	[SerializeField] private Pattern[] m_playerCombos = null;
 
@@ -58,6 +59,7 @@ public class CombatLogic {
 	private float m_playerShake = 0f;
 	private float m_enemyShake = 0f;
 	private List<Emotion> m_currentCombo = new List<Emotion>();
+	public bool IsDone { get; private set; } = false;
 
 	// values
 	[SerializeField] private float m_playerComboDropDelay;
@@ -67,6 +69,8 @@ public class CombatLogic {
 
 	// should be called at the begining of a battle to confirm if the battle can start and to init some values
 	public bool Init(PlayerController player, EnemyController enemy) {
+		m_playerHealthIndicator[0].gameObject.SetActive(false);
+		m_enemyHealthIndicator[0].gameObject.SetActive(false);
 		m_player = player;
 		m_enemy = enemy;
 		m_eci = m_enemy.GetComponent<EnemyCombatInfo>();
@@ -79,6 +83,8 @@ public class CombatLogic {
 			Debug.LogError($"Cannot start battle because {typeof(EnemyCombatInfo).Name} did not have an attached pattern");
 			return false;
 		}
+		UpdatePlayerHealth();
+		UpdateEnemyHealth();
 		// success
 		return true;
 	}
@@ -91,6 +97,7 @@ public class CombatLogic {
 			Debug.LogError("No death state!");
 			SwitchState(CombatState.None);
 		}
+		UpdatePlayerHealth();
 	}
 
 	private bool DoSwitchPlayerEmote() {
@@ -146,8 +153,38 @@ public class CombatLogic {
 		}
 	}
 
+	private void UpdateEnemyHealth() {
+		m_enemyHealthIndicator[1].enabled = false;
+		m_enemyHealthIndicator[2].enabled = false;
+		m_enemyHealthIndicator[3].enabled = false;
+		switch (m_eci.health) {
+			case 3: m_enemyHealthIndicator[3].enabled = true; goto case 2;
+			case 2: m_enemyHealthIndicator[2].enabled = true; goto case 1;
+			case 1: m_enemyHealthIndicator[1].enabled = true; break;
+			case 0: break;
+			default: break;
+		}
+	}
+
+	private void UpdatePlayerHealth() {
+		m_playerHealthIndicator[1].enabled = false;
+		m_playerHealthIndicator[2].enabled = false;
+		m_playerHealthIndicator[3].enabled = false;
+		switch (m_playerHealth.Value) {
+			case 3: m_playerHealthIndicator[3].enabled = true; goto case 2;
+			case 2: m_playerHealthIndicator[2].enabled = true; goto case 1;
+			case 1: m_playerHealthIndicator[1].enabled = true; break;
+			case 0: break;
+			default: break;
+		}
+	}
+
 	// sets the state and starts combat
 	public void BeginCombat() {
+
+		m_playerHealthIndicator[0].gameObject.SetActive(true);
+		m_enemyHealthIndicator[0].gameObject.SetActive(true);
+
 		// set the first state
 		SwitchState(CombatState.NormalPause);
 
@@ -171,8 +208,6 @@ public class CombatLogic {
 				StateEnemyCombo_ShortPauseB(); break;
 			case CombatState.PostComboPause:
 				StatePostComboPause(); break;
-			case CombatState.EnemyTakeDamage:
-				StateEnemyTakeDamage(); break;
 			default: Debug.LogError($"Combat logic invalid state {m_state}"); break;
 		}
 
@@ -215,9 +250,21 @@ public class CombatLogic {
 	private void StateNormalPause() {
 		m_timer += Time.deltaTime;
 		if (m_timer > m_normalDelay) {
-			SwitchState(CombatState.EnemyCombo_ShowEmotion);
-			m_curpatpos = 0;
-			m_playerComboText.text = null;
+			// enemy not dead start next combo
+			if (m_eci.health != 0) {
+				SwitchState(CombatState.EnemyCombo_ShowEmotion);
+				m_curpatpos = 0;
+				m_playerComboText.text = null;
+			}
+			// enemy dead
+			else {
+				SwitchState(CombatState.None);
+				m_playerComboText.text = null;
+				m_enemyComboText.text = null;
+				IsDone = true;
+				m_playerHealthIndicator[0].gameObject.SetActive(false);
+				m_enemyHealthIndicator[0].gameObject.SetActive(false);
+			}
 		}
 	}
 
@@ -241,6 +288,7 @@ public class CombatLogic {
 		m_timer += Time.deltaTime * m_eci.attackSpeed;
 		if (m_timer > m_shortPauseLength) {
 			SwitchState(CombatState.EnemyCombo_Attack);
+			//enemyAnimator.Attack();
 		}
 	}
 
@@ -275,6 +323,8 @@ public class CombatLogic {
 		}
 		// equal or losing has same result
 		else {
+			// animate
+			enemyAnimator.Attack();
 			Log("Hurt");
 			// return to begining of combo
 			SwitchState(CombatState.NormalPause);
@@ -354,29 +404,25 @@ public class CombatLogic {
 			if (matchany && exactmatch) {
 				// hit enemy
 				m_eci.health--;
+				enemyAnimator.Hurt();
+				UpdateEnemyHealth();
 
-				// enemy died
-				if (m_eci.health == 0) {
-					// TODO: end battle
-					SwitchState(CombatState.PostBattle);
-					m_playerComboText.text = null;
-				}
-				// enemy lived
-				else {
-					m_enemyShake = 0.65f;
-					SwitchState(CombatState.NormalPause);
-					m_playerComboText.text = null;
-				}
+				m_enemyShake = 0.65f;
+				SwitchState(CombatState.NormalPause);
+				m_playerComboText.text = null;
+				m_canSwitchEmote = true;
 
 			}
 			// we are doing a combo
 			else if (matchany) {
-				// ignore
+				// animate
+				enemyAnimator.Hurt();
 			}
 			// we fucked up the combo
 			else {
 				PlayerTakeDamage();
 				SwitchState(CombatState.NormalPause);
+				m_canSwitchEmote = true;
 			}
 
 		}
@@ -385,10 +431,10 @@ public class CombatLogic {
 			m_canSwitchEmote = true;
 			SwitchState(CombatState.NormalPause);
 			PlayerTakeDamage();
+			enemyAnimator.Attack();
 		}
 	}
 
-	private void StateEnemyTakeDamage() { }
 
 
 }

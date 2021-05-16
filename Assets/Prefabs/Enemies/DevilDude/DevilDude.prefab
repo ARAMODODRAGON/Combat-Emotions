@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4754224243227145724}
   - component: {fileID: 2383357718440511958}
   - component: {fileID: 9114561316151662683}
+  - component: {fileID: 2313712839782265289}
   m_Layer: 0
   m_Name: DevilDude
   m_TagString: Untagged
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2095761857
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 777330849eca6d845b3fa31dd45188a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -194,3 +195,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67997efa1fffa804887d066dd5184261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2313712839782265289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754224243227145723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6547068cbbf9a14297e7476df1e7445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern: {fileID: 11400000, guid: 072b5e0dff994b84199dfe71a6aa8281, type: 2}
+  attackSpeed: 1
+  delay: 2
+  health: 3
+  points: 100
+  targetType: 2

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580631ec0b03c5d4f8fb17ee8537dedc, type: 3}
   m_Name: Combo B
   m_EditorClassIdentifier: 
-  m_emotionPattern: 01010202
+  m_emotionPattern: 0102010203
   m_targetType: 1
