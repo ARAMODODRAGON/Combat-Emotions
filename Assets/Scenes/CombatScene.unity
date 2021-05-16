@@ -345,6 +345,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b57e388e9fb6b324085a87d5e8967719, type: 3}
+--- !u!1 &680249000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680249001}
+  - component: {fileID: 680249002}
+  m_Layer: 5
+  m_Name: GameOverScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &680249001
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680249000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1397276604}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.49987793, y: 0.50006104}
+  m_SizeDelta: {x: -1, y: -1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &680249002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680249000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &730434115
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_scoreValue: 0
   m_score: {fileID: 11400000, guid: f94929436bc158140a40325ff2977ee4, type: 2}
-  m_healthValue: 3
+  m_healthValue: 1
   m_health: {fileID: 11400000, guid: 6bc496c25f2e87947a287f7e8f69d26a, type: 2}
   m_levelValue: 1
   m_level: {fileID: 11400000, guid: e7afe1d725f9ffd4fbe43c48501c830b, type: 2}
@@ -480,6 +529,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828c4b3a2d3867e418654015d48cc3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1397276604 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1911037571, guid: 3324a8aad8cef8142af1e85fd58adf41, type: 3}
+  m_PrefabInstance: {fileID: 533693683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1462656548
 PrefabInstance:
   m_ObjectHideFlags: 0
