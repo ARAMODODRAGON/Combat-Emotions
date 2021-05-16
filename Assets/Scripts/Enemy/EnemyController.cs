@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
 
 	private void FixedUpdate()
     {
-		if (b_Moving)
+		if (b_Moving && !EnemyManager.s_enmInstance.bEngagedInBattle)
 		{
 			PlayerController playerRef = EnemyManager.s_enmInstance.playerRef;
 			Vector2 directionToPlayer = (playerRef.transform.position - gameObject.transform.position);
@@ -47,5 +47,25 @@ public class EnemyController : MonoBehaviour
 	{
 		EnemyManager.s_enmInstance.RemoveEnemyContoller(enemyIndex);
 	}
+
+	public void StartMoving()
+    {
+		Debug.Log("Start moving");
+		b_Moving = true;
+		gameObject.GetComponent<EnemyAnimator>().ToggleMove();
+
+	}
+
+	private void OnTriggerEnter2D(Collider2D col_)
+    {
+		if(col_!=this && col_!=null)
+        {
+			PlayerController pc_ = col_.GetComponent<PlayerController>();
+			if(pc_)
+            {
+				//Add code to begin fight
+            }
+        }
+    }
 
 }

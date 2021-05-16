@@ -36,12 +36,16 @@ public class EnemyManager : MonoBehaviour
     }
     #endregion
 
-    private static List<EnemyController> s_enemyControllers;
-    public readonly PlayerController playerRef = null;
+    private static List<EnemyController> s_enemyControllers = new List<EnemyController>();
+    public PlayerController playerRef = null;
 
 
     public static int countEnemies => s_enemyControllers.Count;
     public static EnemyController GetEnemy(int index) => s_enemyControllers[index];
+
+    private Dictionary<int, List<EnemySpawner>> enemySpawners = new Dictionary<int, List<EnemySpawner>>();
+    public bool bEngagedInBattle = false; //Turns true once a battle starts
+
 
     private void Start()
     {
@@ -64,11 +68,37 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-    public void BeginEncounter()
+    public void BeginEncounter(int encounterIndex_)
     {
-        //TODO
+        //Called from the gate system once we enter a new area with new enemies
         //Instantiate the enemies
-        s_enemyControllers[0].b_Moving = true;
+        foreach (EnemySpawner es in enemySpawners[encounterIndex_])
+        {
+            es.SpawnEnemy();
+        }
+        Invoke("ForceTheFirstEnemyToMove", 1.0f); //Give the enemy controllers time to register before forcing the first one to move
 
+    }
+
+    private void ForceTheFirstEnemyToMove()
+    {
+        if(s_enemyControllers.Count>0)
+            if(s_enemyControllers[0])
+                s_enemyControllers[0].StartMoving();
+    }
+
+    public void RegisterSpawner(int key_, EnemySpawner es_)
+    {
+        //Automating the creation of enemyspawner lists
+        if(enemySpawners.ContainsKey(key_))
+        {
+            enemySpawners[key_].Add(es_);
+        }
+        else
+        {
+            List<EnemySpawner> les = new List<EnemySpawner>();
+            les.Add(es_);
+            enemySpawners.Add(key_, les);
+        }
     }
 }
