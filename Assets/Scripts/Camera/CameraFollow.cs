@@ -80,6 +80,11 @@ public class CameraFollow : MonoBehaviour
 		state = CameraStates.MoveRight;
 	}
 
+	public void ChangeState(CameraStates state_)
+	{
+		state = state_;
+	}
+
 	//move the camera to a set location before locking it
 	void MoveLock(Vector3 pos_)
 	{
