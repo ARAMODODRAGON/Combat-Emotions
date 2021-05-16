@@ -193,6 +193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 8086936952381107149, guid: 3324a8aad8cef8142af1e85fd58adf41, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 650708560}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3324a8aad8cef8142af1e85fd58adf41, type: 3}
 --- !u!114 &533693685 stripped
@@ -204,17 +208,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76b74b2fc90f62d4f8574662e3de67c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &607097640 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4754224243227145724, guid: ff406686a9a79314595d608e1df9ae26, type: 3}
-  m_PrefabInstance: {fileID: 1462656548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e56d7a717e8826448e7a6db706e83e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &650708559
@@ -344,23 +337,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b57e388e9fb6b324085a87d5e8967719, type: 3}
---- !u!1 &708257340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6707295390103029632, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
-  m_PrefabInstance: {fileID: 1170373201}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &708257341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708257340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67997efa1fffa804887d066dd5184261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &730434115
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handler: {fileID: 533693685}
   player: {fileID: 1170373202}
-  enemy: {fileID: 607097640}
+  enemy: {fileID: 1250967573}
   startSetting: 1
   key: 102
 --- !u!114 &730434118
@@ -494,10 +470,21 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1959491978, guid: ff1ad98b077fab34ebe49f7f51003404, type: 3}
   m_PrefabInstance: {fileID: 1170373201}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708257340}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 828c4b3a2d3867e418654015d48cc3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1250967573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4754224243227145724, guid: 12f7bc9a89d97cb4492180f225963f5e, type: 3}
+  m_PrefabInstance: {fileID: 1780613178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e56d7a717e8826448e7a6db706e83e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1462656548

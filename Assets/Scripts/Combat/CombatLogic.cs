@@ -12,7 +12,9 @@ public class CombatLogic {
 		EnemyCombo_ShortPauseA,
 		EnemyCombo_Attack,
 		EnemyCombo_ShortPauseB,
-		PostComboPause
+		PostComboPause,
+		WaitingForDeath,
+		GameOver
 	}
 
 	// input
@@ -46,7 +48,12 @@ public class CombatLogic {
 	[SerializeField] private UnityEngine.UI.Image[] m_playerHealthIndicator = null;
 	[SerializeField] private UnityEngine.UI.Image[] m_enemyHealthIndicator = null;
 
+	[SerializeField] private GameObject m_gameOverScreen = null;
+	[SerializeField] private UnityEngine.UI.Text m_finalScoreText = null;
+
 	[SerializeField] private Pattern[] m_playerCombos = null;
+
+	[SerializeField] private int m_sceneToLoadOnGameOver = 0;
 
 	// state
 	private CombatState m_state = CombatState.None;
@@ -94,8 +101,10 @@ public class CombatLogic {
 		m_playerShake = 0.65f;
 		m_playerHealth.Value -= 1;
 		if (m_playerHealth.Value == 0) {
-			Debug.LogError("No death state!");
-			SwitchState(CombatState.None);
+			SwitchState(CombatState.WaitingForDeath);
+			m_player.anim.ToggleDie();
+		} else {
+			m_player.anim.Hurt();
 		}
 		UpdatePlayerHealth();
 	}
@@ -208,6 +217,10 @@ public class CombatLogic {
 				StateEnemyCombo_ShortPauseB(); break;
 			case CombatState.PostComboPause:
 				StatePostComboPause(); break;
+			case CombatState.WaitingForDeath:
+				StateWaitingForDeath(); break;
+			case CombatState.GameOver:
+				StateGameOver(); break;
 			default: Debug.LogError($"Combat logic invalid state {m_state}"); break;
 		}
 
@@ -299,8 +312,6 @@ public class CombatLogic {
 
 		// get enemy emotion
 		Emotion enemyemote = m_eci.pattern[m_curpatpos];
-
-		// TODO: play enemy attack animation
 
 		// hide icon
 		SetEnemyEmoteIcon(Emotion.None);
@@ -436,6 +447,18 @@ public class CombatLogic {
 		}
 	}
 
+	private void StateWaitingForDeath() {
+		if (m_player.anim.IsDead) {
+			SwitchState(CombatState.GameOver);
+			m_gameOverScreen.SetActive(true);
+			m_finalScoreText.text = "Final Score:\n" + scoreValue.Value.ToString().PadLeft(9, '0');
+		}
+	}
 
+	private void StateGameOver() {
+		if (AngryKeyDown || HappyKeyDown || SadKeyDown) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneToLoadOnGameOver);
+		}
+	}
 
 }

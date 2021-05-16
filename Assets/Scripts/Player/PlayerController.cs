@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		anim = GetComponent<EnemyAnimator>();
+		anim.destroyOnDie = false;
 	}
 
 	public void Start()
