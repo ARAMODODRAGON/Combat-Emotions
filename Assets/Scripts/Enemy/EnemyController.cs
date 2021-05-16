@@ -63,7 +63,8 @@ public class EnemyController : MonoBehaviour
 			PlayerController pc_ = col_.GetComponent<PlayerController>();
 			if(pc_)
             {
-				//Add code to begin fight
+				EnemyManager.s_enmInstance.combatHandler.StartCombat(pc_, this);
+				return;
             }
         }
     }

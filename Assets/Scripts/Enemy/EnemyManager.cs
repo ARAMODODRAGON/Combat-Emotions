@@ -46,6 +46,7 @@ public class EnemyManager : MonoBehaviour
     private Dictionary<int, List<EnemySpawner>> enemySpawners = new Dictionary<int, List<EnemySpawner>>();
     public bool bEngagedInBattle = false; //Turns true once a battle starts
 
+    public CombatHandler combatHandler = null;
 
     private void Start()
     {

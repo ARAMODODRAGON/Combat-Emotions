@@ -47,6 +47,7 @@ public class CombatHandler : MonoBehaviour {
 		m_lastScore = m_scoreValue.Value;
 		m_logic.enemyTargetPos = m_enemyTargetPos;
 		m_logic.playerTargetPos = m_playerTargetPos;
+		m_logic.scoreValue = m_scoreValue;
 	}
 
 	// starts combat between the given player and enemy
@@ -64,6 +65,7 @@ public class CombatHandler : MonoBehaviour {
 		m_playerSprite = player.GetComponent<SpriteRenderer>();
 		m_enemySprite = enemy.GetComponent<SpriteRenderer>();
 		m_logic.enemyAnimator = m_enemyAnimator = enemy.GetComponent<EnemyAnimator>();
+		m_player.anim.ToggleIdle();
 		m_playerSprite.sortingOrder = 2;
 		m_enemySprite.sortingOrder = 2;
 
@@ -77,7 +79,7 @@ public class CombatHandler : MonoBehaviour {
 			}
 			if (ec.body) ec.body.simulated = false;
 		}
-		/* TMP */
+		player.enabled = false;
 		Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
 		if (rb) rb.simulated = false;
 
@@ -161,6 +163,8 @@ public class CombatHandler : MonoBehaviour {
 					if (ec.body) ec.body.simulated = true;
 				}
 			}
+			m_player.enabled = true;
+			m_player.GetComponent<Rigidbody2D>().simulated = true;
 		}
 		float delta = m_currentLerpValue / m_timeToToggleCombat;
 

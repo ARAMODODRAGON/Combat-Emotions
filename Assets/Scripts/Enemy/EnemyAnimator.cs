@@ -13,6 +13,8 @@ public class EnemyAnimator : MonoBehaviour
     private static readonly int ANIM_ATTACK = Animator.StringToHash("Attack");
     private static readonly int ANIM_HURT = Animator.StringToHash("Hurt");
 
+    public bool destroyOnDie = true;
+    public bool IsDead { get; private set; } = false;
 
     void Start()
     {
@@ -39,7 +41,9 @@ public class EnemyAnimator : MonoBehaviour
 
     public void Dead()
     {
-        Destroy(gameObject);
+        if (destroyOnDie)
+            Destroy(gameObject);
+        IsDead = true;
     }
 
     public void Attack()
