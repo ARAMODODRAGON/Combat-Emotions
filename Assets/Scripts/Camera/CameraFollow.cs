@@ -120,12 +120,17 @@ public class CameraFollow : MonoBehaviour
 	{ 
 		if (g_ != null)
 		{
-			state = g_.state;
-			if (g_.combat == true)
+			if (g_.triggered == false)
 			{
-				EnemyManager.s_enmInstance.BeginEncounter(g_.encounterIndex);
-				Debug.Log("Combat Called");
-				Debug.Log(g_.encounterIndex);
+				state = g_.state;
+				if (g_.combat == true)
+				{
+					//EnemyManager.s_enmInstance.BeginEncounter(g_.encounterIndex);
+					Debug.Log("Combat Called");
+					Debug.Log(g_.encounterIndex);
+				}
+
+				g_.triggered = true;
 			}
 		}
 	}
