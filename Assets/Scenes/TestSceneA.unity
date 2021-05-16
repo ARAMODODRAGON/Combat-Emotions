@@ -254,6 +254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 476761488746402137, guid: ed7292911f3f1384e99b2933cab6e9fc, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 4754224243227145724, guid: b57e388e9fb6b324085a87d5e8967719, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed7292911f3f1384e99b2933cab6e9fc, type: 3}
 --- !u!1001 &3868530855771576677
@@ -324,6 +328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 44449777687324408, guid: 1d4937b4ec5b4a549b3622b470f0edcf, type: 3}
+      propertyPath: playerRef
+      value: 
+      objectReference: {fileID: 1799850097}
     - target: {fileID: 3202118626256119367, guid: 1d4937b4ec5b4a549b3622b470f0edcf, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -376,7 +384,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3651711189086960814, guid: 1d4937b4ec5b4a549b3622b470f0edcf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d4937b4ec5b4a549b3622b470f0edcf, type: 3}
 --- !u!1001 &6707295389361356296
 PrefabInstance:

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7107622429863468431}
   - component: {fileID: 5811306589308033644}
   - component: {fileID: 4754224243227145724}
-  - component: {fileID: 8558573196698542984}
-  - component: {fileID: 8749418930298429065}
+  - component: {fileID: 2383357718440511958}
+  - component: {fileID: 9114561316151662683}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 4754224243227145723}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bd43b5a44704c5a4d8a232ed13d08899, type: 2}
+  m_Controller: {fileID: 9100000, guid: ca5e04e1ccf09554b984537044863b58, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   b_Moving: 0
   speed: 10
---- !u!114 &8558573196698542984
+--- !u!114 &2383357718440511958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,12 +177,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4754224243227145723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb3bdc5084f2da6468e3c5c74f16685a, type: 3}
+  m_Script: {fileID: 11500000, guid: a2056ae8057863148a7809ac01f3a2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAttackRadius: 0
+  enemyAttackRadius: -1
   effects: {fileID: 11400000, guid: dbe0f995c3d14a34bb5255f60f7568d6, type: 2}
---- !u!114 &8749418930298429065
+--- !u!114 &9114561316151662683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,6 +191,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4754224243227145723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a15ed6e31f9c344e89f04637470bccf, type: 3}
+  m_Script: {fileID: 11500000, guid: 67997efa1fffa804887d066dd5184261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
