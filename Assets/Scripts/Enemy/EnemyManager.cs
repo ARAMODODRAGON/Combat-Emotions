@@ -64,6 +64,12 @@ public class EnemyManager : MonoBehaviour
         if(index_ >= 0 && index_ < countEnemies)
         {
             s_enemyControllers.RemoveAt(index_);
+
+            if(s_enemyControllers.Count == 0)
+            {
+                //TODO
+                //Call Sean's stuff to unlock camera 
+            }
         }
     }
 
