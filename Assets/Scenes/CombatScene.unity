@@ -355,6 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730434116}
   - component: {fileID: 730434117}
+  - component: {fileID: 730434118}
   m_Layer: 0
   m_Name: CombatStarter
   m_TagString: Untagged
@@ -393,6 +394,24 @@ MonoBehaviour:
   enemy: {fileID: 607097640}
   startSetting: 1
   key: 102
+--- !u!114 &730434118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730434115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb8d2822d5eea549982973fc7843d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_scoreValue: 0
+  m_score: {fileID: 11400000, guid: f94929436bc158140a40325ff2977ee4, type: 2}
+  m_healthValue: 3
+  m_health: {fileID: 11400000, guid: 6bc496c25f2e87947a287f7e8f69d26a, type: 2}
+  m_levelValue: 1
+  m_level: {fileID: 11400000, guid: e7afe1d725f9ffd4fbe43c48501c830b, type: 2}
 --- !u!1001 &1170373201
 PrefabInstance:
   m_ObjectHideFlags: 0

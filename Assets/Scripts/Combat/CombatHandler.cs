@@ -35,12 +35,16 @@ public class CombatHandler : MonoBehaviour {
 	// UI stuff
 	[SerializeField] private UnityEngine.UI.Image m_fadeOverlay = null;
 	[SerializeField] [Range(0.0f, 1.0f)] private float m_fadeOverlayTargetAlpha = 0.0f;
+	[SerializeField] private UnityEngine.UI.Text m_scoreText = null;
+	[SerializeField] private IntValue m_scoreValue;
+	private int m_lastScore = 0;
 
 	// timings of stuff
 	[Header("Timings")]
 	[SerializeField] private float m_timeToToggleCombat;
 
 	private void Awake() {
+		m_lastScore = m_scoreValue.Value;
 		m_logic.enemyTargetPos = m_enemyTargetPos;
 		m_logic.playerTargetPos = m_playerTargetPos;
 	}
@@ -95,6 +99,11 @@ public class CombatHandler : MonoBehaviour {
 			case HandlerState.LeavingCombat: UpdateExitCombat(); break;
 			default: Debug.LogError("Combat Handler unsupported state: " + m_handlerState); break;
 		}
+
+		if (m_lastScore != m_scoreValue.Value) {
+			m_lastScore = m_scoreValue.Value;
+			m_scoreText.text = m_lastScore.ToString().PadLeft(9, '0');
+		}
 	}
 
 	private void UpdateEnterCombat() {
@@ -124,7 +133,10 @@ public class CombatHandler : MonoBehaviour {
 		//m_enemy.transform.position = m_enemyTargetPos.position;
 
 		if (!m_logic.IsDone) m_logic.Step();
-		else m_handlerState = HandlerState.LeavingCombat;
+		else {
+			m_scoreValue.Value += m_enemy.GetComponent<EnemyCombatInfo>().points;
+			m_handlerState = HandlerState.LeavingCombat;
+		}
 	}
 
 	private void UpdateExitCombat() {
