@@ -22,4 +22,16 @@ public class EnemyCombatInfo : MonoBehaviour {
 	[Tooltip("the type of enemy")]
 	public int targetType;
 
+	private void Awake() {
+		int level5 = EnemyManager.ClampInt(EnemyManager.s_enmInstance.levelValue.Value / EnemyManager.s_enmInstance.levelCap, 
+			1, EnemyManager.s_enmInstance.levelCap / 5);
+
+		if (level5 > 2) {
+			delay *= 0.5f;
+			attackSpeed *= 0.5f;
+			points = 500;
+		}
+
+	}
+
 }

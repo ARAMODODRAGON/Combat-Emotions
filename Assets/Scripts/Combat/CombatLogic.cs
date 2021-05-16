@@ -272,6 +272,7 @@ public class CombatLogic {
 			}
 			// enemy dead
 			else {
+				scoreValue.Value += m_enemy.GetComponent<EnemyCombatInfo>().points;
 				SwitchState(CombatState.None);
 				m_playerComboText.text = null;
 				m_enemyComboText.text = null;

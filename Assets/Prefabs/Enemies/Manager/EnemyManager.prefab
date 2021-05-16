@@ -45,3 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
   bEngagedInBattle: 0
+  combatHandler: {fileID: 0}
+  m_easyEnemy: {fileID: 4754224243227145723, guid: ff406686a9a79314595d608e1df9ae26, type: 3}
+  m_normalEnemy: {fileID: 4754224243227145723, guid: b57e388e9fb6b324085a87d5e8967719, type: 3}
+  m_hardEnemy: {fileID: 4754224243227145723, guid: 12f7bc9a89d97cb4492180f225963f5e, type: 3}
+  levelValue: {fileID: 0}
+  m_enemiesPer5Levels: 2
+  levelCap: 30

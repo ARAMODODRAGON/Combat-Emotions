@@ -136,7 +136,6 @@ public class CombatHandler : MonoBehaviour {
 
 		if (!m_logic.IsDone) m_logic.Step();
 		else {
-			m_scoreValue.Value += m_enemy.GetComponent<EnemyCombatInfo>().points;
 			m_handlerState = HandlerState.LeavingCombat;
 		}
 	}

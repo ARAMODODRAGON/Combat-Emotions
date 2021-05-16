@@ -48,6 +48,15 @@ public class EnemyManager : MonoBehaviour
 
     public CombatHandler combatHandler = null;
 
+    [SerializeField] private GameObject m_easyEnemy;
+    [SerializeField] private GameObject m_normalEnemy;
+    [SerializeField] private GameObject m_hardEnemy;
+
+    public IntValue levelValue;
+
+    [SerializeField] private int m_enemiesPer5Levels = 2;
+    public int levelCap = 30;
+
     private void Start()
     {
         
@@ -77,6 +86,49 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public static int ClampInt(int t, int min, int max) {
+        if (t < min) return min;
+        if (t > max) return max;
+        return t;
+	}
+
+	public void SpawnEnemies(Vector3 position, Vector3 maxpos) {
+
+        int level5 = levelValue.Value / 5;
+        int maxlevel5 = levelCap / 5;
+        int enemyCount = ClampInt(level5 + Random.Range(-1, 1), 1, levelCap / 5) * m_enemiesPer5Levels;
+
+        List<int> spawnchances = new List<int>();
+        spawnchances.Add((maxlevel5 - level5) * 80);
+        spawnchances.Add((level5) * 30);
+        spawnchances.Add((level5) * 5);
+
+		for (int i = 0; i < enemyCount; i++) {
+
+            GameObject go = null; 
+            Vector3 pos = Vector3.Lerp(position, maxpos, Random.Range(0.2f, 1.0f));
+            pos.y = Random.Range(-7f, 7f);
+            int chance = Random.Range(0, 2);
+
+            int spawn = -1;
+
+			for (int j = 0; j < spawnchances.Count; j++) {
+                if (spawnchances[j] > chance) {
+                    spawn = j;
+                    break;
+                } else chance -= spawnchances[j];
+			}
+
+			switch (spawn) {
+                case 0: go = Instantiate(m_easyEnemy, pos, Quaternion.identity); break;
+                case 1: go = Instantiate(m_normalEnemy, pos, Quaternion.identity); break;
+                case 2: go = Instantiate(m_hardEnemy, pos, Quaternion.identity); break;
+				default: goto case 2;
+			}
+
+		}
+
+	}
 
     public void BeginEncounter(int encounterIndex_)
     {

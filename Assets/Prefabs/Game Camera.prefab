@@ -47,7 +47,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -92,10 +92,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19787edb5995911438029140f1c1d6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_camera: {fileID: 3868530855648310294}
   player: {fileID: 0}
-  state: 0
-  cameraTime: 0
-  tolerance: 0
+  state: 3
+  cameraTime: 0.5
+  tolerance: 0.1
+  m_distanceToStop: 10
+  m_levelValue: {fileID: 11400000, guid: e7afe1d725f9ffd4fbe43c48501c830b, type: 2}
 --- !u!81 &3868530855648310295
 AudioListener:
   m_ObjectHideFlags: 0
@@ -111,7 +114,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868530855648310292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -137,7 +140,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868530855648310292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -163,7 +166,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868530855648310292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -189,7 +192,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868530855648310292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

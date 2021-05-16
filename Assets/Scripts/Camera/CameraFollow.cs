@@ -15,6 +15,8 @@ public enum CameraStates
 
 public class CameraFollow : MonoBehaviour
 {
+	[SerializeField] private Camera m_camera;
+
 	// playerref
 	public PlayerController player;
 	[SerializeField] CameraStates state;
@@ -29,37 +31,49 @@ public class CameraFollow : MonoBehaviour
 	Vector3 cameraVelocity = Vector3.zero;
 	Vector3 moveLocPosition;
 
+	[SerializeField] private float m_distanceToStop = 10f;
+	private float m_lastXPos = 0f;
+	[SerializeField] private IntValue m_levelValue;
+
     // Start is called before the first frame update
     void Start()
     {
 		state = CameraStates.MoveRight;
-    }
+		m_lastXPos = transform.position.x;
+
+	}
 
     // Update is called once per frame
     void LateUpdate()
     {
 		switch (state)
 		{
-			case CameraStates.Follow:
-				{
-					Follow();
-					break;
-				}
+			//case CameraStates.Follow:
+			//{
+			//	Follow();
+			//	break;
+			//}
 			case CameraStates.Locked:
-				{
+			{
+				// check if done fighting
+				if (EnemyManager.countEnemies == 0) {
+					m_levelValue.Value++;
+					state = CameraStates.MoveRight;
+					m_lastXPos = transform.position.x;
+				}
 
-					break;
-				}
+				break;
+			}
 			case CameraStates.MoveLock:
-				{
-					MoveLock();
-					break;
-				}
+			{
+				MoveLock();
+				break;
+			}
 			case CameraStates.MoveRight:
-				{
-					Follow();
-					break;
-				}
+			{
+				Follow();
+				break;
+			}
 		}
     }
 
@@ -110,14 +124,23 @@ public class CameraFollow : MonoBehaviour
 	// smoothly follow the player
 	void Follow()
 	{
-		Vector3 target = player.gameObject.transform.position + new Vector3(0.0f,0.0f, -10.0f);
+		Vector3 playertarget = player.gameObject.transform.position + new Vector3(0.0f,0.0f, -10.0f);
+		Vector3 targetpos = transform.position;
+		targetpos.x = m_lastXPos +  m_distanceToStop;
 
 		//Vector3 smoothTarget = Vector3.Lerp(transform.position, target, cameraSpeed * Time.deltaTime);
-		Vector3 smoothTarget = Vector3.SmoothDamp(transform.position, target, ref cameraVelocity, cameraTime);
+		Vector3 smoothTarget = Vector3.SmoothDamp(transform.position, playertarget, ref cameraVelocity, cameraTime);
+		smoothTarget.y = 0f;
 
 		if (state == CameraStates.Follow || (state == CameraStates.MoveRight && smoothTarget.x > gameObject.transform.position.x))
 		{
 			gameObject.transform.position = smoothTarget;
+		}
+
+		if (Mathf.Abs(targetpos.x - transform.position.x) < 1f) {
+			transform.position = targetpos;
+			EnemyManager.s_enmInstance.SpawnEnemies(transform.position, transform.position + new Vector3(m_camera.orthographicSize, 0f, 0f));
+			state = CameraStates.Locked;
 		}
 	}
 
