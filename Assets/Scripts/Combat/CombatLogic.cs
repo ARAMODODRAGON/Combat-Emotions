@@ -25,7 +25,7 @@ public class CombatLogic {
 
 	// references
 	[SerializeField] private IntValue m_playerHealth;
-	[SerializeField] private IntValue m_scoreValue;
+	[HideInInspector] public IntValue scoreValue;
 
 	private PlayerController m_player = null;
 	private EnemyController m_enemy = null;
@@ -234,6 +234,7 @@ public class CombatLogic {
 			if (m_enemyShake < 0.5f) offset *= m_enemyShake / 0.5f;
 			m_enemy.transform.position = offset + enemyTargetPos.position;
 		} else m_enemy.transform.position = enemyTargetPos.position;
+
 	}
 
 	private void Log(string s) {
