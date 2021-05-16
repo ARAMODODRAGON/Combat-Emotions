@@ -6,7 +6,7 @@ using UnityEngine;
 public class CombatHandler : MonoBehaviour {
 
 	// this handles all the logic for the battle 
-	private CombatLogic m_logic = new CombatLogic();
+	[SerializeField] private CombatLogic m_logic = new CombatLogic();
 
 	enum HandlerState : byte {
 		Waiting,
@@ -46,6 +46,12 @@ public class CombatHandler : MonoBehaviour {
 
 	// starts combat between the given player and enemy
 	public void StartCombat(PlayerController player, EnemyController enemy) {
+		if (!player || !enemy) {
+			Debug.LogError("missing player or enemy reference");
+			return;
+		}
+
+		if (!m_logic.Init(player, enemy)) return;
 
 		// step 0: set enemy and player references also change the enemy and player sprite sorting layer index
 		m_player = player;
@@ -71,7 +77,6 @@ public class CombatHandler : MonoBehaviour {
 		m_currentLerpValue = 0.0f;
 		m_playerOldPos = m_player.transform.position;
 		m_enemyOldPos = m_enemy.transform.position;
-		m_logic.Init(m_player, m_enemy);
 
 	}
 
@@ -91,6 +96,7 @@ public class CombatHandler : MonoBehaviour {
 		if (m_currentLerpValue > m_timeToToggleCombat) {
 			m_currentLerpValue = m_timeToToggleCombat;
 			m_handlerState = HandlerState.PlayingCombat;
+			m_logic.BeginCombat();
 		}
 		float delta = m_currentLerpValue / m_timeToToggleCombat;
 
@@ -104,7 +110,11 @@ public class CombatHandler : MonoBehaviour {
 
 	private void UpdatePlayingCombat() {
 		/* TMP */
-		if (Input.GetKeyDown(KeyCode.F)) m_handlerState = HandlerState.LeavingCombat;
+		//if (Input.GetKeyDown(KeyCode.F)) m_handlerState = HandlerState.LeavingCombat;
+
+		//// reset player and enemy locations
+		//m_player.transform.position = m_playerTargetPos.position;
+		//m_enemy.transform.position = m_enemyTargetPos.position;
 
 		m_logic.Step();
 	}

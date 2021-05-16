@@ -11,6 +11,13 @@ public class Pattern : ScriptableObject {
 	// access the emotion at that index
 	public Emotion this[int index] => m_emotionPattern[index];
 
+	// access the target type
+	public int TargetType => m_targetType;
+
 	// private list of emotions for this pattern
 	[SerializeField] private List<Emotion> m_emotionPattern;
+
+	[Header("Player only variables")]
+	[SerializeField] private int m_targetType;
+
 }

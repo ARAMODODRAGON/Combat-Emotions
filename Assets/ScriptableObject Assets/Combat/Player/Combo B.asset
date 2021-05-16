@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Combo B
   m_EditorClassIdentifier: 
   m_emotionPattern: 01010202
+  m_targetType: 1
